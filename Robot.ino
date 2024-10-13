@@ -12,12 +12,7 @@ void setup()
 {
   Serial.begin(9600);
   
-  pinMode(REVERSE_LEFT, OUTPUT);
-  pinMode(FORWARD_LEFT, OUTPUT);
-  
-  pinMode(REVERSE_RIGHT, OUTPUT);
-  pinMode(FORWARD_RIGHT, OUTPUT);
-
+  setup_motors();
   setup_lights();
 }
 

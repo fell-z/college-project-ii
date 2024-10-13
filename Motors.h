@@ -1,6 +1,7 @@
 #ifndef MOTORS_H
 #define MOTORS_H
 
+void setup_motors();
 void run_motors(int8_t movement, int8_t steer);
 void move_forward();
 void move_backwards();

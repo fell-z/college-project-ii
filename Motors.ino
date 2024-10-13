@@ -14,6 +14,14 @@ enum DIRECTIONS {
   RIGHT_STEER = 1
 };
 
+void setup_motors()
+{
+  pinMode(REVERSE_LEFT, OUTPUT);
+  pinMode(FORWARD_LEFT, OUTPUT);
+  pinMode(REVERSE_RIGHT, OUTPUT);
+  pinMode(FORWARD_RIGHT, OUTPUT);
+}
+
 void run_motors(int8_t movement, int8_t steer)
 {
   if (movement == FORWARD)
