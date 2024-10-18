@@ -4,14 +4,16 @@ enum PINS {
   REVERSE_LEFT = 4,
   FORWARD_LEFT,
   REVERSE_RIGHT,
-  FORWARD_RIGHT,
+  FORWARD_RIGHT
 };
 
-enum DIRECTIONS {
-  FORWARD = -1,
-  BACKWARDS = 1,
-  LEFT_STEER = -1,
-  RIGHT_STEER = 1
+enum MOVEMENTS_MASK {
+  STOP_BIT         = 0b0000,
+
+  FORWARD_BIT      = 0b0001,
+  REVERSE_BIT      = 0b0010,
+  ROTATE_LEFT_BIT  = 0b0100,
+  ROTATE_RIGHT_BIT = 0b1000,
 };
 
 void setup_motors()
@@ -22,48 +24,47 @@ void setup_motors()
   pinMode(FORWARD_RIGHT, OUTPUT);
 }
 
-void run_motors(int8_t movement, int8_t steer)
+void run_motors(byte movement)
 {
-  if (movement == FORWARD)
-    move_forward();
-  else if (movement == BACKWARDS)
-    move_backwards();
-  else
+  if (movement == STOP_BIT)
     stop_motors();
 
-  if (steer == LEFT_STEER)
-    left_steer();
-  else if (steer == RIGHT_STEER)
-    right_steer();
-  else
-    stop_motors();
+  if (movement & FORWARD_BIT)
+    forward();
+  else if (movement & REVERSE_BIT)
+    reverse();
+
+  if (movement & ROTATE_LEFT_BIT)
+    rotate_left();
+  else if (movement & ROTATE_RIGHT_BIT)
+    rotate_right();
 }
 
-void move_forward(void)
+static void forward()
 {
   digitalWrite(FORWARD_LEFT, HIGH);
   digitalWrite(FORWARD_RIGHT, HIGH);
 }
 
-void move_backwards(void)
+static void reverse()
 {
   digitalWrite(REVERSE_LEFT, HIGH);
   digitalWrite(REVERSE_RIGHT, HIGH);
 }
 
-void left_steer(void)
+static void rotate_left()
 {
   digitalWrite(REVERSE_LEFT, HIGH);
   digitalWrite(FORWARD_RIGHT, HIGH);
 }
 
-void right_steer(void)
+static void rotate_right()
 {
   digitalWrite(FORWARD_LEFT, HIGH);
   digitalWrite(REVERSE_RIGHT, HIGH);
 }
 
-void stop_motors(void)
+static void stop_motors()
 {
   digitalWrite(FORWARD_LEFT, LOW);
   digitalWrite(FORWARD_RIGHT, LOW);
