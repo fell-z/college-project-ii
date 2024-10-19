@@ -34,39 +34,36 @@ void run_lights(byte lights)
 
 		return;
 	}
+  else {
+    turn_off_light_range(LEFT_CAR_LIGHT, LEFT_SIGNAL_LIGHT);
+  }
 
 	if (lights & HAZARD_LIGHT_BIT) {
 		turn_on_light_range(LEFT_CAR_LIGHT, LEFT_SIGNAL_LIGHT, CRGB::Yellow);
-		blink_lights_range(LEFT_CAR_LIGHT, LEFT_SIGNAL_LIGHT);
+		show_lights();
 
 		return;
 	}
+  else {
+    turn_off_light_range(LEFT_CAR_LIGHT, LEFT_SIGNAL_LIGHT);
+  }
 
 	if (lights & CAR_LIGHT_BIT) {
-		turn_on_light_range(RIGHT_CAR_LIGHT, LEFT_CAR_LIGHT, CRGB::PowderBlue);
+		turn_on_light_range(LEFT_CAR_LIGHT, RIGHT_CAR_LIGHT, CRGB::PowderBlue);
 	}
 	else {
-		turn_off_light_range(RIGHT_CAR_LIGHT, LEFT_CAR_LIGHT);
+		turn_off_light_range(LEFT_CAR_LIGHT, RIGHT_CAR_LIGHT);
 	}
 
+	leds[RIGHT_SIGNAL_LIGHT] = (lights & RIGHT_SIGNAL_BIT) ? CRGB::Yellow : CRGB::Black;
+	leds[LEFT_SIGNAL_LIGHT] = (lights & LEFT_SIGNAL_BIT) ? CRGB::Yellow : CRGB::Black;
+
 	show_lights();
-
-	leds[RIGHT_SIGNAL_LIGHT] = (lights & LEFT_SIGNAL_BIT) ? CRGB::Yellow : CRGB::Black;
-	leds[LEFT_SIGNAL_LIGHT] = (lights & RIGHT_SIGNAL_BIT) ? CRGB::Yellow : CRGB::Black;
-
-	blink_lights_range(RIGHT_SIGNAL_LIGHT, LEFT_SIGNAL_LIGHT);
 }
 
 static void show_lights()
 {
-  FastLED.delay(1000/FRAMES_PER_SECOND);
-}
-
-static void blink_lights_range(int first, int last)
-{
-	FastLED.delay(BLINK_INTERVAL);
-	turn_off_light_range(first, last);
-	FastLED.delay(BLINK_INTERVAL);
+  EVERY_N_MILLISECONDS(1000/FRAMES_PER_SECOND) { FastLED.show(); }
 }
 
 static void turn_on_light_range(int first, int last, CRGB::HTMLColorCode color)

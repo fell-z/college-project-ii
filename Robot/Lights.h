@@ -10,7 +10,6 @@
 
 #define BRIGHTNESS        20
 #define FRAMES_PER_SECOND 120
-#define BLINK_INTERVAL    400 // in ms
 
 static void show_lights();
 static void blink_lights_range(int first, int last);
