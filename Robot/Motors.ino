@@ -40,6 +40,21 @@ void run_motors(byte movement)
     rotate_right();
 }
 
+void combo()
+{
+  rotate_left();
+  delay(1500);
+  stop_motors();
+
+  reverse();
+  delay(500);
+  stop_motors();
+
+  rotate_right();
+  delay(1500);
+  stop_motors();
+}
+
 static void forward()
 {
   digitalWrite(FORWARD_LEFT, HIGH);

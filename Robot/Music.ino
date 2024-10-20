@@ -42,7 +42,7 @@ static int note_duration_in_ms()
 
 static bool play_note()
 {
-  tone(BUZZER, notes[i_note], note_duration_in_ms() * 0.9);
+  tone(BUZZER, notes[i_note], note_duration_in_ms() * 0.8);
 
   return true;
 }

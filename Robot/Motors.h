@@ -9,5 +9,6 @@ static void stop_motors();
 
 extern void setup_motors();
 extern void run_motors(byte movement);
+extern void combo();
 
 #endif

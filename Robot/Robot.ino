@@ -1,6 +1,5 @@
 /// @author fell-z  matheusfelipeagapito@hotmail.com
 /// @brief  A implementation that grants movement and special moves to a 'Sumo Robot'
-/// @note   A proper special move implementation has to be made yet
 
 #include "Motors.h"
 #include "Music.h"
@@ -33,6 +32,9 @@ void loop()
   action = buffer[1];
 
   run_motors(movement);
+
+  if (action & COMBO_BIT)
+    combo();
 
   if (action & HORN_BIT) {
     set_playing(true);

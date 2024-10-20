@@ -10,9 +10,11 @@
 
 #define BRIGHTNESS        20
 #define FRAMES_PER_SECOND 120
+#define BLINK_INTERVAL    400
 
 static void show_lights();
-static void blink_lights_range(int first, int last);
+static void blink_signal_light(int light);
+static void blink_hazard_lights();
 static void turn_on_light_range(int first, int last, CRGB::HTMLColorCode color);
 static void turn_off_light_range(int first, int last);
 static void rainbow_lights();
