@@ -61,7 +61,7 @@ static bool stop_note()
 
 static bool is_final_note()
 {
-	return (i_note == 0);
+  return (i_note == 0);
 }
 
 void setup_music()
